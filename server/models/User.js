@@ -35,6 +35,11 @@ const userSchema = new mongoose.Schema(
       enum: ['user', 'admin'],
       default: 'user'
     },
+    userType: {
+      type: String,
+      enum: ['individual', 'agent', 'family'],
+      default: 'individual'
+    },
     isProfileComplete: {
       type: Boolean,
       default: false

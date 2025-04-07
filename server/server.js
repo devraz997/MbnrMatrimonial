@@ -10,6 +10,8 @@ dotenv.config();
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
 const profileRoutes = require('./routes/profiles');
+const agentRoutes = require('./routes/agents');
+const verificationRoutes = require('./routes/verification');
 
 // Initialize express app
 const app = express();
@@ -22,6 +24,8 @@ app.use(cors());
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/profiles', profileRoutes);
+app.use('/api/agents', agentRoutes);
+app.use('/api/verification', verificationRoutes);
 
 // Default route
 app.get('/', (req, res) => {

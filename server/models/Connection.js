@@ -19,6 +19,17 @@ const connectionSchema = new mongoose.Schema(
     },
     message: {
       type: String
+    },
+    agent: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    initiatedByAgent: {
+      type: Boolean,
+      default: false
+    },
+    notes: {
+      type: String
     }
   },
   {
