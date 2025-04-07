@@ -28,19 +28,27 @@ app.get('/', (req, res) => {
   res.send('MBNR Matrimonial API is running');
 });
 
+// Health check route (important for Render)
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server is running' });
+});
+
+// Start server first (important for Render)
+const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 // Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB');
-    // Start server
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error('MongoDB connection error:', err.message);
+    // Don't crash the server if MongoDB connection fails
+    // This allows Render to detect the open port
   });
 
 // Handle unhandled promise rejections
